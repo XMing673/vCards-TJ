@@ -47,9 +47,10 @@ jobs:
           docker tag $DOCKER_USERNAME/vcards:$IMAGE_VERSION $DOCKER_USERNAME/vcards:latest
           docker push $DOCKER_USERNAME/vcards:$IMAGE_VERSION
           docker push $DOCKER_USERNAME/vcards:latest
-          
+
+          GITHUB_USERNAME_LOWER=$(echo "$GITHUB_USERNAME" | tr '[:upper:]' '[:lower:]')
           echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin
-          docker build -t ghcr.io/$GITHUB_USERNAME/vcards:$IMAGE_VERSION .
-          docker tag ghcr.io/$GITHUB_USERNAME/vcards:$IMAGE_VERSION ghcr.io/$GITHUB_USERNAME/vcards:latest
-          docker push ghcr.io/$GITHUB_USERNAME/vcards:$IMAGE_VERSION
-          docker push ghcr.io/$GITHUB_USERNAME/vcards:latest
+          docker build -t ghcr.io/$GITHUB_USERNAME_LOWER/vcards:$IMAGE_VERSION .
+          docker tag ghcr.io/$GITHUB_USERNAME_LOWER/vcards:$IMAGE_VERSION ghcr.io/$GITHUB_USERNAME/vcards:latest
+          docker push ghcr.io/$GITHUB_USERNAME_LOWER/vcards:$IMAGE_VERSION
+          docker push ghcr.io/$GITHUB_USERNAME_LOWER/vcards:latest
