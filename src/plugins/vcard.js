@@ -15,10 +15,9 @@ const plugin = (file, _, cb) => {
   }
   // 修改过滤条件，保留所有号码
   if (vCard.cellPhone) {
-    // 不进行任何过滤
+    // 确保所有电话号码都是字符串类型，避免数字精度问题
     vCard.cellPhone = vCard.cellPhone
       .filter((phone) => {
-        const phoneStr = `${phone}`
         return true // 允许所有号码通过
       })
   }
