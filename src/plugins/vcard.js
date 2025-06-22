@@ -11,12 +11,7 @@ const plugin = (file, _, cb) => {
   let vCard = vCardsJS()
   vCard.isOrganization = true
   for (const [key, value] of Object.entries(json.basic)) {
-    if (key === 'cellPhone' && Array.isArray(value)) {
-      // 确保电话号码都是字符串格式
-      vCard[key] = value.map(phone => String(phone))
-    } else {
-      vCard[key] = value
-    }
+    vCard[key] = value
   }
   // 修改过滤条件，保留所有号码
   if (vCard.cellPhone) {
