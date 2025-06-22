@@ -11,7 +11,12 @@ const plugin = (file, _, cb) => {
   let vCard = vCardsJS()
   vCard.isOrganization = true
   for (const [key, value] of Object.entries(json.basic)) {
-    vCard[key] = value
+    if (key === 'cellPhone' && Array.isArray(value)) {
+      // 确保电话号码都是字符串格式
+      vCard[key] = value.map(phone => String(phone))
+    } else {
+      vCard[key] = value
+    }
   }
   // 修改过滤条件，保留所有号码
   if (vCard.cellPhone) {
@@ -20,7 +25,6 @@ const plugin = (file, _, cb) => {
       .filter((phone) => {
         return true // 允许所有号码通过
       })
-      .map(phone => String(phone)) // 确保转换为字符串
   }
   vCard.photo.embedFromFile(path.replace('.yaml', '.png'))
   let formatted = vCard.getFormattedString()
