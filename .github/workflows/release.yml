@@ -51,6 +51,6 @@ jobs:
           GITHUB_USERNAME_LOWER=$(echo "$GITHUB_USERNAME" | tr '[:upper:]' '[:lower:]')
           echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME_LOWER --password-stdin
           docker build -t ghcr.io/$GITHUB_USERNAME_LOWER/vcards:$IMAGE_VERSION .
-          docker tag ghcr.io/$GITHUB_USERNAME_LOWER/vcards:$IMAGE_VERSION ghcr.io/$GITHUB_USERNAME/vcards:latest
+          docker tag ghcr.io/$GITHUB_USERNAME_LOWER/vcards:$IMAGE_VERSION ghcr.io/$GITHUB_USERNAME_LOWER/vcards:latest
           docker push ghcr.io/$GITHUB_USERNAME_LOWER/vcards:$IMAGE_VERSION
           docker push ghcr.io/$GITHUB_USERNAME_LOWER/vcards:latest
