@@ -54,3 +54,8 @@ jobs:
           docker tag ghcr.io/$GITHUB_USERNAME_LOWER/vcards:$IMAGE_VERSION ghcr.io/$GITHUB_USERNAME_LOWER/vcards:latest
           docker push ghcr.io/$GITHUB_USERNAME_LOWER/vcards:$IMAGE_VERSION
           docker push ghcr.io/$GITHUB_USERNAME_LOWER/vcards:latest
+      - name: Call Webhook
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+        run: |
+          curl -X POST $WEBHOOK_URL
